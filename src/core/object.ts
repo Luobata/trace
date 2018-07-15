@@ -2,7 +2,7 @@
  * @description trace object
  */
 
-import { Iinput, isObject, isFunction } from '@/lib/interface';
+import { Iinput, isObject, isFunction, isArray } from '@/lib/interface';
 import traceFun from '@/core/function';
 
 const walk = (input: Iinput): void => {
@@ -14,6 +14,10 @@ const walk = (input: Iinput): void => {
             walk(input[i]);
         } else if (isFunction) {
             traceFun(input, i, input[i]);
+        } else if (isArray(input[i])) {
+            for (const j of input[i]) {
+                walk(j);
+            }
         } else {
             defineProperty(input, i, input[i]);
         }
