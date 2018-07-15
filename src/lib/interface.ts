@@ -11,3 +11,7 @@ export interface Iinput {
 export function isObject(input: any): input is object {
     return Object.prototype.toString.call(input) === '[object Object]';
 }
+
+export function isFunction(input: any): input is object {
+    return Object.prototype.toString.call(input) === '[object Function]';
+}

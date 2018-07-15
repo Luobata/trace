@@ -2,13 +2,21 @@
  * @description trace object
  */
 
-import { Iinput } from '@/lib/interface';
+import { Iinput, isObject, isFunction } from '@/lib/interface';
+import traceFun from '@/core/function';
 
-export default (input: Iinput): void => {
+const walk = (input: Iinput): void => {
     const keys: string[] = Object.keys(input);
 
     for (const i of keys) {
-        defineProperty(input, i, input[i]);
+        // type switch
+        if (isObject(input[i])) {
+            walk(input[i]);
+        } else if (isFunction) {
+            traceFun(input, i, input[i]);
+        } else {
+            defineProperty(input, i, input[i]);
+        }
     }
 };
 
@@ -39,7 +47,7 @@ const defineProperty: Function = (obj: Iinput, key: string, val: any): void => {
                 setter.call(data);
             } else {
                 // logger(data);
-                console.trace(data);
+                console.trace(`key: ${key}, value: ${data}`);
                 val = data;
             }
         },
@@ -58,3 +66,5 @@ const logger: Function = function(data: any) {
     // }
     // console.log('functions on stack:' + '\n' + stack.join('\n'));
 };
+
+export default walk;

@@ -1,15 +1,17 @@
 import trace from '../src/index';
+import { log } from 'util';
 
 window.onload = () => {
     const a = {
         b: 1,
+        c: a => {
+            console.log(a);
+        },
     };
 
     trace(a);
 
     setTimeout(() => {
-        console.log(a.b);
-        a.b = 2;
-        console.log(a.b);
+        a.c(231);
     }, 2000);
 };
