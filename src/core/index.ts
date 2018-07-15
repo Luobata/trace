@@ -1,8 +1,11 @@
 /**
  * @description trace entry
  */
-import { traceInput } from 'Lib/interface';
+import { traceInput, isObject } from 'Lib/interface';
+import traceObj from '@/core/object';
 
 export default (input: traceInput): void => {
-    console.log(input);
+    if (isObject(input)) {
+        traceObj(input);
+    }
 };
