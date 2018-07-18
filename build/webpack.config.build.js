@@ -19,9 +19,9 @@ var prodWebpackConfig = {
     entry: root + '/src/index.js',
     output: {
         path: assetsRoot,
-        library: 'bundle',
+        library: 'trace',
         libraryTarget: 'umd',
-        filename: 'bundle.js',
+        filename: 'trace.js',
     },
     plugins: [
         new webpack.DefinePlugin({
